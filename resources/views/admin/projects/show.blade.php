@@ -57,4 +57,5 @@
     </div>
   </div>
   {{-- /Modal --}}
+</div>
 @endsection

@@ -11,6 +11,7 @@
       <th>Descrizione</th>
       <th>Slug</th>
       <th>Github Repository</th>
+      <th>Tipo</th>
       <th></th>
     </thead>
   
@@ -21,6 +22,10 @@
         <td>{{$project->description}}</td>
         <td>{{$project->slug}}</td>
         <td><a href="{{$project->github_repository}}" target="_blank">{{$project->github_repository}}</a></td>
+
+        {{-- stampo il tipo solo dove esiste --}}
+        <td>{{$project->type?->name}}</td>
+        
         <td><a href="{{route('admin.projects.show', $project)}}"><i class="fa-solid fa-magnifying-glass"></i></a></td>
       </tr>
       @endforeach
