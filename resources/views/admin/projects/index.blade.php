@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-  <h1>Tutti i progetti</h1>
+  <h1>Tutti i Progetti</h1>
 
   <table class="mt-5 table table-striped">
     <thead>
@@ -11,7 +11,7 @@
       <th>Descrizione</th>
       <th>Slug</th>
       <th>Github Repository</th>
-      <th>Comandi</th>
+      <th></th>
     </thead>
   
     <tbody>
@@ -21,7 +21,7 @@
         <td>{{$project->description}}</td>
         <td>{{$project->slug}}</td>
         <td><a href="{{$project->github_repository}}" target="_blank">{{$project->github_repository}}</a></td>
-        <td><a href="{{route('admin.projects.show', $project->slug)}}"><i class="fa-solid fa-magnifying-glass"></i></a></td>
+        <td><a href="{{route('admin.projects.show', $project)}}"><i class="fa-solid fa-magnifying-glass"></i></a></td>
       </tr>
       @endforeach
     </tbody>

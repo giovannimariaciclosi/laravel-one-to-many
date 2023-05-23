@@ -4,7 +4,7 @@
 
 <main>
   <div class="container mb-3 mt-3">
-    <form action="{{route('admin.projects.update', $project->slug)}}" method="POST">
+    <form action="{{route('admin.projects.update', $project)}}" method="POST">
       @csrf
 
       @method('PUT')

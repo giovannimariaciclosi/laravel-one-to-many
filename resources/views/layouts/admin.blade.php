@@ -36,23 +36,33 @@ function routeNameContains($string) {
   <div id="admin-layout">
     <aside id="admin-sidebar"> 
       <div class="card {{ $routeName == 'admin.home' ? 'border-primary' : '' }}">
-          <div class="card-header {{ $routeName == 'admin.home' ? 'text-primary' : '' }}">
-            Dashboard
-          </div>
-          <div class="list-group list-group-flush">
-              <a href="{{route('admin.home')}}" class="list-group-item list-group-item-action  {{routeNameContains('admin.home') ? 'active' : ''}}">Home</a>
-          </div>
+        <div class="card-header {{ $routeName == 'admin.home' ? 'text-primary' : '' }}">
+          Dashboard
+        </div>
+        <div class="list-group list-group-flush">
+          <a href="{{route('admin.home')}}" class="list-group-item list-group-item-action  {{routeNameContains('admin.home') ? 'active' : ''}}">Home</a>
+        </div>
       </div>
 
-        <div class="card {{ routeNameContains('projects.') ? 'border-primary' : '' }}">
-            <div class="card-header {{ routeNameContains('projects.') ? 'text-primary' : '' }}">
-              Progetti
-            </div>
-            <div class="list-group list-group-flush">
-                <a href="{{route('admin.projects.index')}}" class="list-group-item list-group-item-action {{routeNameContains('projects.index') ? 'active' : ''}}">Tutti i progetti</a>
-                <a href="{{route('admin.projects.create')}}" class="list-group-item list-group-item-action {{routeNameContains('projects.create') ? 'active' : ''}}">Aggiungi un progetto</a>
-            </div>
+      <div class="card {{ routeNameContains('projects.') ? 'border-primary' : '' }}">
+        <div class="card-header {{ routeNameContains('projects.') ? 'text-primary' : '' }}">
+          Progetti
         </div>
+        <div class="list-group list-group-flush">
+          <a href="{{route('admin.projects.index')}}" class="list-group-item list-group-item-action {{routeNameContains('projects.index') ? 'active' : ''}}">Tutti i progetti</a>
+          <a href="{{route('admin.projects.create')}}" class="list-group-item list-group-item-action {{routeNameContains('projects.create') ? 'active' : ''}}">Aggiungi un progetto</a>
+        </div>
+      </div>
+
+      <div class="card {{ routeNameContains('types.') ? 'border-primary' : '' }}">
+        <div class="card-header {{ routeNameContains('types.') ? 'text-primary' : '' }}">
+          Tipi
+        </div>
+        <div class="list-group list-group-flush">
+          <a href="{{route('admin.types.index')}}" class="list-group-item list-group-item-action {{routeNameContains('types.index') ? 'active' : ''}}">Tutti i tipi</a>
+          <a href="{{route('admin.types.create')}}" class="list-group-item list-group-item-action {{routeNameContains('types.create') ? 'active' : ''}}">Aggiungi un tipo</a>
+        </div>
+     </div>
 
     </aside>
     <main>
