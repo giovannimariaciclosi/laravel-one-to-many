@@ -18,10 +18,27 @@
           </div>
         @enderror
       </div>
+
+      <div class="mb-3">
+        <label for="type_id">Tipo</label>
+        <select class="form-select @error('type_id') is-invalid @enderror" id="type_id" name="type_id">
+          <option value="">Nessun Tipo</option>
+
+          @foreach ($types as $type)
+            <option value="{{$type->id}}" {{$type->id == old('type_id') ? 'selected' : ''}}>{{$type->name}}</option>
+          @endforeach
+        </select>
+
+        @error('type_id')
+          <div class="invalid-feedback">
+            {{$message}}
+          </div>
+        @enderror
+      </div>
   
       <div class="mb-3">
         <label for="description">Descrizione</label>
-        <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{old('description')}}</textarea>
+        <textarea cols="30" rows="10" class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{old('description')}}</textarea>
         @error('description')
           {{-- se c'è un errore visualizzo il messaggio di errore del campo specificato --}}
           <div class="invalid-feedback">

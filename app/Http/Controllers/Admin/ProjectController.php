@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -28,7 +29,10 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.projects.create');
+        // creo un array di tipi e lo passo con il compact
+        $types = Type::all();
+
+        return view('admin.projects.create', compact('types'));
     }
 
     /**
@@ -76,7 +80,10 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        // creo un array di tipi e lo passo con il compact
+        $types = Type::all();
+
+        return view('admin.projects.edit', compact('project', 'types'));
     }
 
     /**
@@ -128,17 +135,21 @@ class ProjectController extends Controller
             'description' => 'required',
             'slug' => 'nullable',
             'github_repository' => 'required|max:255',
+
+            // il campo type_id deve esistere nella tabella types con campo id
+            'type_id' => 'nullable|exists:types,id',
         ], [
             // messaggi da comunicare all'utente per ogni errore
-            'title.required' => 'Il campo Titolo non può essere vuoto.',
+            'title.required' => 'Devi inserire un Titolo.',
             'title.max' => 'Il campo Titolo deve essere minore di 200 caratteri.',
             'title.min' => 'Il campo Titolo deve essere maggiore di 5 caratteri',
-            'description.required' => 'Il campo Descrizione non può essere vuoto.',
+            'description.required' => 'Devi inserire una Descrizione.',
             // 'slug.required' => "Il campo Slug non può essere vuoto e deve essere uguale al campo Titolo.",
             // 'slug.max' => 'Il campo Slug deve essere minore di 200 caratteri ed uguale al campo Titolo.',
             // 'slug.min' => 'Il campo Slug deve essere maggiore di 5 caratteri ed uguale al campo Titolo.',
-            'github_repository.required' => 'Il campo Link Repository Github non può essere vuoto.',
+            'github_repository.required' => 'Devi inserire un Link Repository Github.',
             'github_repository.max' => 'Il campo Link Repository Github deve essere minore di 255 caratteri.',
+            'type_id.exists' => 'Il Tipo deve essere scelto esclusivamente tra le opzioni disponibili.',
         ])->validate();
 
         // restituisco il validator che in caso di errore fa automaticamente il redirect

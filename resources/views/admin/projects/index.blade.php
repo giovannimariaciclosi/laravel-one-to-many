@@ -20,7 +20,7 @@
         <td>{{$project->title}}</td>
         <td>{{$project->description}}</td>
         <td>{{$project->slug}}</td>
-        <td>{{$project->github_repository}}</td>
+        <td><a href="{{$project->github_repository}}" target="_blank">{{$project->github_repository}}</a></td>
         <td><a href="{{route('admin.projects.show', $project->slug)}}"><i class="fa-solid fa-magnifying-glass"></i></a></td>
       </tr>
       @endforeach
