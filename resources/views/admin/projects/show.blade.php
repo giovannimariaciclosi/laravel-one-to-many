@@ -5,6 +5,7 @@
 <div class="container">
   <div class="main">
     <h1>{{$project->title}}</h1>
+    <span>Tipo:</span>
     <hr>
     <span>Descrizione:</span>
     <p>{{$project->description}}</p>
