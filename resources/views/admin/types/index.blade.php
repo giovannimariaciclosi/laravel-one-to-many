@@ -28,4 +28,8 @@
   </table>
 </div>
 
+<div class="container">
+  <a href="{{route('admin.types.create')}}" class="btn btn-success mb-5 mt-2" type="button">Aggiungi un nuovo tipo</a>
+</div>
+
 @endsection

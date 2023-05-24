@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+// helper per gestire le stringhe
+use Illuminate\Support\Str;
 
 class TypeController extends Controller
 {
@@ -27,7 +30,7 @@ class TypeController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.types.create');
     }
 
     /**
@@ -38,7 +41,19 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $formData = $request->all();
+
+        $this->validation($formData);
+
+        $formData['slug'] = Str::slug($formData['name'], '-');
+
+        $newType = new Type();
+
+        $newType->fill($formData);
+
+        $newType->save();
+
+        return redirect()->route('admin.types.show', $newType);
     }
 
     /**
@@ -60,7 +75,7 @@ class TypeController extends Controller
      */
     public function edit(Type $type)
     {
-        //
+        return view('admin.types.edit', compact('type'));
     }
 
     /**
@@ -72,7 +87,15 @@ class TypeController extends Controller
      */
     public function update(Request $request, Type $type)
     {
-        //
+        $formData = $request->all();
+
+        $this->validation($formData);
+
+        $formData['slug'] = Str::slug($formData['name'], '-');
+
+        $type->update($formData);
+
+        return redirect()->route('admin.types.show', $type);
     }
 
     /**
@@ -83,6 +106,23 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
-        //
+        $type->delete();
+
+        return redirect()->route('admin.types.index');
+    }
+
+    // validazione
+    private function validation($formData)
+    {
+        $validator = Validator::make($formData, [
+            'name' => 'max:100|required|unique:App\Models\Type,name',
+            'description' => 'required',
+        ], [
+            'name.max' => 'Il campo Nome deve essere minore di :max caratteri.',
+            'name.required' => 'Devi inserire un Nome.',
+            'name.unique' => 'È già presente una categoria con questo Nome.',
+            'description.required' => 'Devi inserire una Descrizione.'
+        ])->validate();
+        return $validator;
     }
 }
